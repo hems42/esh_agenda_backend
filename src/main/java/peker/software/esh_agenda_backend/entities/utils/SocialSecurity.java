@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SocialSecurities",
         uniqueConstraints = {
-                @UniqueConstraint(name = "SocialSecurity",columnNames = "UK_SOCIAL_SECURITY")
+                @UniqueConstraint(name = "UK_SOCIAL_SECURITY",columnNames = "SocialSecurity")
         }
 )
 public class SocialSecurity {

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -59,6 +60,11 @@ public class Patient {
 
     @Column(nullable = false)
     private String placeOfBirth;
+
+    private Boolean isActive = true;
+
+    @Column(nullable = false)
+    private CurrentStateOfPatient currentStateOfPatient=CurrentStateOfPatient.ACTIVE;
 
     @Column(name = "CreatedDate", updatable = false)
     private LocalDateTime createdDate;

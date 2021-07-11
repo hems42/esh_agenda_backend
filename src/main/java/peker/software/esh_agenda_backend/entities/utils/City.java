@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Cities",
         uniqueConstraints = {
-                              @UniqueConstraint(name = "CityName",columnNames = "UK_CITY_NAME")
+                              @UniqueConstraint(name = "UK_CITY_NAME",columnNames = "CityName")
         }
 )
 public class City {
