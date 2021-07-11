@@ -35,7 +35,6 @@ public class CreatePatientRequest {
 
     private Boolean isActive = true;
 
-    private CurrentStateOfPatient currentStateOfPatient = CurrentStateOfPatient.ACTIVE;
 
     public static Patient convert(CreatePatientRequest from) {
 
@@ -52,7 +51,7 @@ public class CreatePatientRequest {
                 from.getAge(),
                 from.getPlaceOfBirth(),
                 from.getIsActive(),
-                from.getCurrentStateOfPatient(),
+                CurrentStateOfPatient.ACTIVE,
                 null,
                 null
         );
