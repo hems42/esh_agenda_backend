@@ -16,9 +16,11 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "Patients",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "PatientNumber", name = "UK_PATIENT_NUMBER"),
+                @UniqueConstraint(columnNames = "PatientNumber", name = "UK_PATIENT_NUMBER"
+                ),
                 @UniqueConstraint(columnNames = "NationalIdentityNumber", name = "UK_NATIONAL_IDENTITY_NUMBER")
-                            }
+
+        }
 )
 public class Patient {
 
@@ -26,27 +28,27 @@ public class Patient {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "PatientId")
-    private String  id;
+    private String id;
 
     @Column(name = "PatientNumber", nullable = false, length = 40)
     private String patientNumber;
 
-    @Column(length = 50,nullable = false)
+    @Column(length = 50, nullable = false)
     private String firstName;
 
-    @Column(length = 50,nullable = false)
+    @Column(length = 50, nullable = false)
     private String lastName;
 
-    @Column(name="NationalIdentityNumber",length=20,nullable = false)
+    @Column(name = "NationalIdentityNumber", length = 20, nullable = false)
     private String nationalIdentityNumber;
 
     @Column(nullable = false)
     private String sex;
 
-    @Column(length = 50,nullable = false)
+    @Column(length = 50, nullable = false)
     private String mumName;
 
-    @Column(length = 50,nullable = false)
+    @Column(length = 50, nullable = false)
     private String dadName;
 
     @Column(nullable = false)
@@ -55,20 +57,12 @@ public class Patient {
     @Column(length = 40)
     private int age;
 
+    @Column(nullable = false)
+    private String placeOfBirth;
 
-
-
-
-
-
-
-
-
-
-
-    @Column(name = "CreatedDate",updatable = false)
+    @Column(name = "CreatedDate", updatable = false)
     private LocalDateTime createdDate;
 
-    @Column(name = "UpdatedDate",insertable = false)
+    @Column(name = "UpdatedDate", insertable = false)
     private LocalDateTime updatedDate;
 }
