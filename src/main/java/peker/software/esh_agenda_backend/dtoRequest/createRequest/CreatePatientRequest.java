@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CreatePatientRequest {
 
-    private String patientNumber;
-
     private String firstName;
 
     private String lastName;
@@ -33,14 +31,15 @@ public class CreatePatientRequest {
 
     private String placeOfBirth;
 
-    private Boolean isActive = true;
-
 
     public static Patient convert(CreatePatientRequest from) {
 
         Patient patient = new Patient(
                 null,
-                from.getPatientNumber(),
+                from.getFirstName().substring(0,2)
+                        +from.getLastName().substring(0,2)
+                        +"-"
+                        +LocalDate.now(),
                 from.getFirstName(),
                 from.getLastName(),
                 from.getNationalIdentityNumber(),
@@ -50,7 +49,7 @@ public class CreatePatientRequest {
                 from.getBirthDayOfPatient(),
                 from.getAge(),
                 from.getPlaceOfBirth(),
-                from.getIsActive(),
+                true,
                 CurrentStateOfPatient.ACTIVE,
                 null,
                 null

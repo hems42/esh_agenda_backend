@@ -7,13 +7,14 @@ import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientDto {
 
-    private String id;
+    private UUID id;
 
     private String patientNumber;
 

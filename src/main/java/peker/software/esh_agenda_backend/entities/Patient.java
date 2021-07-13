@@ -10,6 +10,7 @@ import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -29,7 +30,7 @@ public class Patient {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "PatientId")
-    private String id;
+    private UUID id;
 
     @Column(name = "PatientNumber", nullable = false, length = 40)
     private String patientNumber;
