@@ -1,4 +1,5 @@
 package peker.software.esh_agenda_backend.exception;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   @NotNull HttpStatus status,
                                                                   @NotNull WebRequest request) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error ->{
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
@@ -34,13 +35,22 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> userNotFoundExceptionHandler(UserNotFoundException exception)  {
+    public ResponseEntity<?> userNotFoundExceptionHandler(UserNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(AlReadyExistUserException.class)
-    public ResponseEntity<?> alReadyExistUserExceptionHandler(AlReadyExistUserException exception)  {
+    public ResponseEntity<?> alReadyExistUserExceptionHandler(AlReadyExistUserException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @ExceptionHandler(AlReadyExistCityException.class)
+    public ResponseEntity<?> alReadyExistCityExceptionHandler(AlReadyExistUserException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(NotFoundCityException.class)
+    public ResponseEntity<?> notFoundCityExceptionHandler(AlReadyExistUserException exception)  {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+    }
 }

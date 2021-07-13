@@ -3,6 +3,7 @@ package peker.software.esh_agenda_backend.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
@@ -34,7 +35,7 @@ public class PatientDto {
 
     private int age;
 
-    private String placeOfBirth;
+    private City placeOfBirth;
 
     private Boolean isActive = true;
 

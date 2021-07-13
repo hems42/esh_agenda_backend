@@ -20,8 +20,8 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CityId")
-    private String id;
+    private Integer id;
 
-    @Column(name="CityName",nullable = false)
+    @Column(name="CityName",nullable = false,length = 100)
     private String cityName;
 }

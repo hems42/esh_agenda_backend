@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import peker.software.esh_agenda_backend.entities.Patient;
+import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ public class CreatePatientRequest {
 
     private int age;
 
-    private String placeOfBirth;
+    private City placeOfBirth;
 
 
     public static Patient convert(CreatePatientRequest from) {

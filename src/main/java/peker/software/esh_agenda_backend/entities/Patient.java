@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import javax.persistence.*;
@@ -59,8 +60,9 @@ public class Patient {
     @Column(length = 40)
     private int age;
 
-    @Column(nullable = false)
-    private String placeOfBirth;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private City placeOfBirth;
 
     private Boolean isActive = true;
 

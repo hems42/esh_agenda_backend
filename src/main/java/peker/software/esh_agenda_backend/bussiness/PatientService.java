@@ -14,11 +14,14 @@ public class PatientService {
 
     private final PatientDao patientDao;
     private final PatientDtoConvertor patientDtoConvertor;
+    private final CityService  cityService;
 
 
-    public PatientService(PatientDao patientDao, PatientDtoConvertor patientDtoConvertor) {
+
+    public PatientService(PatientDao patientDao, PatientDtoConvertor patientDtoConvertor, CityService cityService) {
         this.patientDao = patientDao;
         this.patientDtoConvertor = patientDtoConvertor;
+        this.cityService = cityService;
     }
 
     public PatientDto createPatient(CreatePatientRequest patientRequest) {
