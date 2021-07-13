@@ -28,6 +28,7 @@ public class PatientDtoConvertor {
                 from.getBirthDayOfPatient(),
                 from.getAge(),
                 cityDtoConvertor.convert(from.getPlaceOfBirth()),
+                null,
                 from.getIsActive(),
                 from.getCurrentStateOfPatient(),
                 from.getCreatedDate(),

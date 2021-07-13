@@ -1,21 +1,23 @@
 package peker.software.esh_agenda_backend.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
+import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "Patients",
         uniqueConstraints = {
@@ -64,6 +66,9 @@ public class Patient {
     @JoinColumn(nullable = false)
     private City placeOfBirth;
 
+    @OneToMany(mappedBy ="patient",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<PhoneNumber> phoneNumbers;
+
     private Boolean isActive = true;
 
     @Column(nullable = false)
@@ -74,4 +79,7 @@ public class Patient {
 
     @Column(name = "UpdatedDate", insertable = false)
     private LocalDateTime updatedDate;
+
+
+
 }

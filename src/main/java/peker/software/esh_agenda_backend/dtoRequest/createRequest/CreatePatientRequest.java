@@ -50,6 +50,7 @@ public class CreatePatientRequest {
                 from.getBirthDayOfPatient(),
                 from.getAge(),
                 null,
+                null,
                 true,
                 CurrentStateOfPatient.ACTIVE,
                 null,
