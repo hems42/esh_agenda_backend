@@ -39,18 +39,18 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(AlReadyExistUserException.class)
-    public ResponseEntity<?> alReadyExistUserExceptionHandler(AlReadyExistUserException exception) {
+    @ExceptionHandler(AlreadyExistUserException.class)
+    public ResponseEntity<?> alReadyExistUserExceptionHandler(AlreadyExistUserException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @ExceptionHandler(AlReadyExistCityException.class)
-    public ResponseEntity<?> alReadyExistCityExceptionHandler(AlReadyExistUserException exception) {
+    @ExceptionHandler(AlreadyExistCityException.class)
+    public ResponseEntity<?> alReadyExistCityExceptionHandler(AlreadyExistCityException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(NotFoundCityException.class)
-    public ResponseEntity<?> notFoundCityExceptionHandler(AlReadyExistUserException exception)  {
+    public ResponseEntity<?> notFoundCityExceptionHandler(NotFoundCityException exception)  {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 }

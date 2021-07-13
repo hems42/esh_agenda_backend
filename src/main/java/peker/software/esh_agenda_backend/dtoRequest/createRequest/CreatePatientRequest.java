@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -30,17 +30,17 @@ public class CreatePatientRequest {
 
     private int age;
 
-    private City placeOfBirth;
+    private Integer placeOfBirthId;
 
 
     public static Patient convert(CreatePatientRequest from) {
 
         Patient patient = new Patient(
                 null,
-                from.getFirstName().substring(0,2)
-                        +from.getLastName().substring(0,2)
-                        +"-"
-                        +LocalDate.now(),
+                from.getFirstName().substring(0, 2)
+                        + from.getLastName().substring(0, 2)
+                        + "-"
+                        + LocalDateTime.now(),
                 from.getFirstName(),
                 from.getLastName(),
                 from.getNationalIdentityNumber(),
@@ -49,7 +49,7 @@ public class CreatePatientRequest {
                 from.getDadName(),
                 from.getBirthDayOfPatient(),
                 from.getAge(),
-                from.getPlaceOfBirth(),
+                null,
                 true,
                 CurrentStateOfPatient.ACTIVE,
                 null,

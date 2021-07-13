@@ -8,6 +8,12 @@ import peker.software.esh_agenda_backend.entities.Patient;
 @Component
 public class PatientDtoConvertor {
 
+    private final CityDtoConvertor cityDtoConvertor;
+
+    public PatientDtoConvertor(CityDtoConvertor cityDtoConvertor) {
+        this.cityDtoConvertor = cityDtoConvertor;
+    }
+
     public Patient convert(PatientDto from) {
 
         Patient patient = new Patient(
@@ -21,7 +27,7 @@ public class PatientDtoConvertor {
                 from.getDadName(),
                 from.getBirthDayOfPatient(),
                 from.getAge(),
-                from.getPlaceOfBirth(),
+                cityDtoConvertor.convert(from.getPlaceOfBirth()),
                 from.getIsActive(),
                 from.getCurrentStateOfPatient(),
                 from.getCreatedDate(),
@@ -48,7 +54,7 @@ public class PatientDtoConvertor {
                 from.getDadName(),
                 from.getBirthDayOfPatient(),
                 from.getAge(),
-                from.getPlaceOfBirth(),
+                cityDtoConvertor.convert(from.getPlaceOfBirth()),
                 from.getIsActive(),
                 from.getCurrentStateOfPatient(),
                 from.getCreatedDate(),

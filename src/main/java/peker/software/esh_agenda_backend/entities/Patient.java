@@ -60,14 +60,14 @@ public class Patient {
     @Column(length = 40)
     private int age;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private City placeOfBirth;
 
     private Boolean isActive = true;
 
     @Column(nullable = false)
-    private CurrentStateOfPatient currentStateOfPatient=CurrentStateOfPatient.ACTIVE;
+    private CurrentStateOfPatient currentStateOfPatient = CurrentStateOfPatient.ACTIVE;
 
     @Column(name = "CreatedDate", updatable = false)
     private LocalDateTime createdDate;
