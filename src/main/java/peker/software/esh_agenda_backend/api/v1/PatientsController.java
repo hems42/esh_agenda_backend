@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import peker.software.esh_agenda_backend.bussiness.PatientService;
 import peker.software.esh_agenda_backend.dto.PatientDto;
+import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
 
 import javax.validation.Valid;
@@ -26,5 +27,8 @@ public class PatientsController {
     public ResponseEntity<PatientDto> createPatient(@Valid @RequestBody CreatePatientRequest patientRequest) {
         return ResponseEntity.ok(patientService.createPatient(patientRequest));
     }
+
+   /* @PostMapping("/addPhoneNumber")
+    public ResponseEntity<PhoneNumberDto> addPhoneNumberToPatient(@)*/
 
 }

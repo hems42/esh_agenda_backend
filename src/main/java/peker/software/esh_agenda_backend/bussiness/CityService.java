@@ -3,6 +3,7 @@ package peker.software.esh_agenda_backend.bussiness;
 import org.springframework.stereotype.Service;
 import peker.software.esh_agenda_backend.core.utils.Messages;
 import peker.software.esh_agenda_backend.dataAccess.CityDao;
+import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoConvertor.CityDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
 import peker.software.esh_agenda_backend.entities.utils.City;
@@ -23,19 +24,19 @@ public class CityService {
         this.convertor = convertor;
     }
 
-    public peker.software.esh_agenda_backend.dto.CityDto createCity(CreateCityRequest cityRequest) {
+    public CityDto createCity(CreateCityRequest cityRequest) {
         if (!anyMatchCity(cityRequest.getCityName())) {
             return convertor.convert(cityDao.save(new City(0, cityRequest.getCityName())));
         } else {
-            return new peker.software.esh_agenda_backend.dto.CityDto();
+            return new CityDto();
         }
     }
 
-    public peker.software.esh_agenda_backend.dto.CityDto getCityById(Integer id) {
+    public CityDto getCityById(Integer id) {
         return convertor.convert(findCityById(id));
     }
 
-    public List<peker.software.esh_agenda_backend.dto.CityDto> getAllCities() {
+    public List<CityDto> getAllCities() {
         return cityDao.findAll().stream().map((c) -> convertor.convert(c)).collect(Collectors.toList());
     }
 
@@ -44,7 +45,7 @@ public class CityService {
     }
 
     private Boolean anyMatchCity(String cityName) {
-        peker.software.esh_agenda_backend.dto.CityDto cityDto = new peker.software.esh_agenda_backend.dto.CityDto(0, cityName);
+        CityDto cityDto = new CityDto(0, cityName);
         Boolean result = getAllCities().stream().anyMatch(cityDtoFound -> cityDtoFound == cityDto);
 
         if (result == true) {

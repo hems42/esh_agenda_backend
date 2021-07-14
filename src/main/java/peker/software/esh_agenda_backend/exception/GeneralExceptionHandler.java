@@ -34,23 +34,35 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> userNotFoundExceptionHandler(UserNotFoundException exception) {
+    @ExceptionHandler(NotFoundUserException.class)
+    public ResponseEntity<?> notFoundUserExceptionHandler(NotFoundUserException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(AlreadyExistUserException.class)
-    public ResponseEntity<?> alReadyExistUserExceptionHandler(AlreadyExistUserException exception) {
+    public ResponseEntity<?> alreadyExistUserExceptionHandler(AlreadyExistUserException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+    }
+
+
+    @ExceptionHandler(NotFoundCityException.class)
+    public ResponseEntity<?> notFoundCityExceptionHandler(NotFoundCityException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(AlreadyExistCityException.class)
-    public ResponseEntity<?> alReadyExistCityExceptionHandler(AlreadyExistCityException exception) {
+    public ResponseEntity<?> alreadyExistCityExceptionHandler(AlreadyExistCityException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @ExceptionHandler(NotFoundCityException.class)
-    public ResponseEntity<?> notFoundCityExceptionHandler(NotFoundCityException exception)  {
+
+    @ExceptionHandler(NotFoundPhoneNumberException.class)
+    public ResponseEntity<?> notFoundPhoneNumberExceptionHandler(NotFoundPhoneNumberException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AlreadyExistPhoneNumberException.class)
+    public ResponseEntity<?> alreadyExistPhoneNumberExceptionHandler(AlreadyExistPhoneNumberException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
 }

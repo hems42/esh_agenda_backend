@@ -13,13 +13,15 @@ class PatientServiceTest {
     private PatientDao patientDao;
     private PatientDtoConvertor patientDtoConvertor;
     private CityService cityService;
+    private PhoneNumberService phoneNumberService;
 
     @BeforeEach
     void setUp() {
         patientDao = mock(PatientDao.class);
         patientDtoConvertor = mock(PatientDtoConvertor.class);
         cityService = mock(CityService.class);
-        patientService = new PatientService(patientDao, patientDtoConvertor, cityService);
+        phoneNumberService = mock(PhoneNumberService.class);
+        patientService = new PatientService(patientDao, patientDtoConvertor, cityService, phoneNumberService);
     }
 
 

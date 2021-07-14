@@ -16,24 +16,21 @@ public class PatientDtoConvertor {
 
     public Patient convert(PatientDto from) {
 
-        Patient patient = new Patient(
-                from.getId(),
-                from.getPatientNumber(),
-                from.getFirstName(),
-                from.getLastName(),
-                from.getNationalIdentityNumber(),
-                from.getSex(),
-                from.getMumName(),
-                from.getDadName(),
-                from.getBirthDayOfPatient(),
-                from.getAge(),
-                cityDtoConvertor.convert(from.getPlaceOfBirth()),
-                null,
-                from.getIsActive(),
-                from.getCurrentStateOfPatient(),
-                from.getCreatedDate(),
-                null
-        );
+        Patient patient = new Patient();
+        patient.setId(from.getId());
+        patient.setPatientNumber(from.getPatientNumber());
+        patient.setFirstName(from.getFirstName());
+        patient.setLastName(from.getLastName());
+        patient.setNationalIdentityNumber(from.getNationalIdentityNumber());
+        patient.setSex(from.getSex());
+        patient.setMumName(from.getMumName());
+        patient.setDadName(from.getDadName());
+        patient.setBirthDayOfPatient(from.getBirthDayOfPatient());
+        patient.setAge(from.getAge());
+        patient.setIsActive(from.getIsActive());
+        patient.setCurrentStateOfPatient(from.getCurrentStateOfPatient());
+        patient.setPlaceOfBirth(cityDtoConvertor.convert(from.getPlaceOfBirth()));
+        patient.setCreatedDate(from.getCreatedDate());
 
         if (from.getUpdatedDate() != null) {
             patient.setUpdatedDate(from.getUpdatedDate());
@@ -44,23 +41,21 @@ public class PatientDtoConvertor {
 
     public PatientDto convert(Patient from) {
 
-        PatientDto patientDto = new PatientDto(
-                from.getId(),
-                from.getPatientNumber(),
-                from.getFirstName(),
-                from.getLastName(),
-                from.getNationalIdentityNumber(),
-                from.getSex(),
-                from.getMumName(),
-                from.getDadName(),
-                from.getBirthDayOfPatient(),
-                from.getAge(),
-                cityDtoConvertor.convert(from.getPlaceOfBirth()),
-                from.getIsActive(),
-                from.getCurrentStateOfPatient(),
-                from.getCreatedDate(),
-                null
-        );
+        PatientDto patientDto = new PatientDto();
+        patientDto.setId(from.getId());
+        patientDto.setPatientNumber(from.getPatientNumber());
+        patientDto.setFirstName(from.getFirstName());
+        patientDto.setLastName(from.getLastName());
+        patientDto.setNationalIdentityNumber(from.getNationalIdentityNumber());
+        patientDto.setSex(from.getSex());
+        patientDto.setMumName(from.getMumName());
+        patientDto.setDadName(from.getDadName());
+        patientDto.setBirthDayOfPatient(from.getBirthDayOfPatient());
+        patientDto.setAge(from.getAge());
+        patientDto.setIsActive(from.getIsActive());
+        patientDto.setCurrentStateOfPatient(from.getCurrentStateOfPatient());
+        patientDto.setPlaceOfBirth(cityDtoConvertor.convert(from.getPlaceOfBirth()));
+        patientDto.setCreatedDate(from.getCreatedDate());
 
         if (from.getUpdatedDate() != null) {
             patientDto.setUpdatedDate(from.getUpdatedDate());
