@@ -1,17 +1,21 @@
 package peker.software.esh_agenda_backend.bussiness;
 
 import org.springframework.stereotype.Service;
+import peker.software.esh_agenda_backend.core.utils.Messages;
 import peker.software.esh_agenda_backend.dataAccess.PatientDao;
 import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoConvertor.PatientDtoConvertor;
-import peker.software.esh_agenda_backend.dtoConvertor.PhoneNumberDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
 import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.exception.NotFoundUserException;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientService {
@@ -46,8 +50,20 @@ public class PatientService {
         return patientDtoConvertor.convert(patientDao.save(patient));
     }
 
-    public PhoneNumberDto addPhoneNumbers(Patient patient, CreatePhoneNumberRequest phoneNumberRequest) {
-        return phoneNumberService.createPhoneNumber(patient, phoneNumberRequest);
+    public List<PhoneNumberDto> addPhoneNumbersByPatientId(UUID patientId,
+                                                           List<CreatePhoneNumberRequest> phoneNumberRequests) {
+
+        Patient patient = findPatientById(patientId);
+
+        return phoneNumberRequests
+                .stream()
+                .map((p) -> phoneNumberService
+                        .createPhoneNumber(patient, p))
+                .collect(Collectors.toList());
+    }
+
+    public Patient findPatientById(UUID patientId) {
+        return patientDao.findById(patientId).orElseThrow(() -> new NotFoundUserException(Messages.NOT_FOUND_PATIENT));
     }
 
 }

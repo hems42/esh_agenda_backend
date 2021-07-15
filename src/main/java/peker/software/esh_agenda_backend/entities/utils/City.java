@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
 @Entity
 @Table(name = "Cities",

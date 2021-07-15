@@ -12,6 +12,7 @@ import peker.software.esh_agenda_backend.exception.AlreadyExistPhoneNumberExcept
 import peker.software.esh_agenda_backend.exception.NotFoundPhoneNumberException;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,14 +21,16 @@ public class PhoneNumberService {
     private final PhoneNumberDao phoneNumberDao;
     private final PhoneNumberDtoConvertor phoneNumberDtoConvertor;
 
-    public PhoneNumberService(PhoneNumberDao phoneNumberDao, PhoneNumberDtoConvertor phoneNumberDtoConvertor) {
+    public PhoneNumberService(PhoneNumberDao phoneNumberDao,
+                              PhoneNumberDtoConvertor phoneNumberDtoConvertor) {
         this.phoneNumberDao = phoneNumberDao;
         this.phoneNumberDtoConvertor = phoneNumberDtoConvertor;
     }
 
-    public PhoneNumberDto createPhoneNumber(Patient patient,CreatePhoneNumberRequest phoneNumberRequest) {
-        return anyMatchPhoneNumber(
-                phoneNumberRequest.getPhoneNumber()) == false ?
+    public PhoneNumberDto createPhoneNumber(Patient patient,
+                                            CreatePhoneNumberRequest phoneNumberRequest) {
+        return noneMatchPhoneNumber(
+                phoneNumberRequest.getPhoneNumber()) == true ?
                 phoneNumberDtoConvertor
                         .convert(phoneNumberDao
                                 .save(new PhoneNumber(
@@ -40,7 +43,7 @@ public class PhoneNumberService {
 
 
     public PhoneNumberDto getPhoneNumberById(Integer id) {
-        return phoneNumberDtoConvertor.convert(gettPhoneNumberById(id));
+        return phoneNumberDtoConvertor.convert(findPhoneNumberById(id));
     }
 
     public List<PhoneNumberDto> getAllPhoneNumbersByPatient(Patient patient) {
@@ -50,15 +53,16 @@ public class PhoneNumberService {
                 .collect(Collectors.toList());
     }
 
-    private PhoneNumber gettPhoneNumberById(Integer id) {
+    private PhoneNumber findPhoneNumberById(Integer id) {
         return phoneNumberDao.findById(id).orElseThrow(() -> new NotFoundPhoneNumberException(Messages.MSG_NOT_FOUND_PHONE_NUMBER));
     }
 
-    private Boolean anyMatchPhoneNumber(String phoneNumber) {
-        Boolean result = phoneNumberDao.findAll().stream()
-                .anyMatch((p) -> p.getPhoneNumber() == phoneNumber ? true : false);
-        if (result == false) {
-            return false;
+    private Boolean noneMatchPhoneNumber(String phoneNumber) {
+
+        Predicate<PhoneNumber> phoneNumberPredicate = p -> p.getPhoneNumber().equals(phoneNumber);
+
+        if (phoneNumberDao.findAll().stream().noneMatch(phoneNumberPredicate)) {
+            return true;
         } else {
             throw new AlreadyExistPhoneNumberException(Messages.MSG_ALL_READY_PHONE_NUMBER + " " + phoneNumber);
         }

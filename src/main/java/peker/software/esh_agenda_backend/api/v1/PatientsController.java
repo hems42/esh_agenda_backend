@@ -2,16 +2,16 @@ package peker.software.esh_agenda_backend.api.v1;
 
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import peker.software.esh_agenda_backend.bussiness.PatientService;
 import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
+import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/patients")
@@ -28,7 +28,14 @@ public class PatientsController {
         return ResponseEntity.ok(patientService.createPatient(patientRequest));
     }
 
-   /* @PostMapping("/addPhoneNumber")
-    public ResponseEntity<PhoneNumberDto> addPhoneNumberToPatient(@)*/
+    @PutMapping("/addPhoneNumbersToPatient")
+    public ResponseEntity<List<PhoneNumberDto>> addPhoneNumberByPatientId(
+            @Valid @RequestParam UUID patientId,
+            @RequestBody List<CreatePhoneNumberRequest> phoneNumberRequestes) {
+        return ResponseEntity.ok(patientService.
+                addPhoneNumbersByPatientId(patientId,
+                        phoneNumberRequestes));
+    }
+
 
 }
