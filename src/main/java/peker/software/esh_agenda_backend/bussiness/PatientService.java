@@ -10,6 +10,7 @@ import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientR
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
 import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.exception.AlreadyExistUserException;
 import peker.software.esh_agenda_backend.exception.NotFoundUserException;
 
 import java.time.LocalDateTime;
@@ -47,7 +48,11 @@ public class PatientService {
 
         patient.setPlaceOfBirth(city);
 
-        return patientDtoConvertor.convert(patientDao.save(patient));
+        return noneMatchPatient(patientRequest
+                .getNationalIdentityNumber()) == true
+                ? patientDtoConvertor
+                .convert(patientDao.save(patient))
+                : new PatientDto();
     }
 
     public List<PhoneNumberDto> addPhoneNumbersByPatientId(UUID patientId,
@@ -63,7 +68,15 @@ public class PatientService {
     }
 
     public Patient findPatientById(UUID patientId) {
-        return patientDao.findById(patientId).orElseThrow(() -> new NotFoundUserException(Messages.NOT_FOUND_PATIENT));
+        return patientDao.findById(patientId).orElseThrow(() -> new NotFoundUserException(Messages.MSG_NOT_FOUND_PATIENT));
     }
 
+    public Boolean noneMatchPatient(String nationalIdentityNumber) {
+
+        if (patientDao.existsPatientByNationalIdentityNumber(nationalIdentityNumber)) {
+            throw new AlreadyExistUserException(Messages.MSG_ALL_READY_PATIENT + " Tc No: " + nationalIdentityNumber);
+        } else {
+            return true;
+        }
+    }
 }

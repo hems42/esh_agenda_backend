@@ -59,14 +59,11 @@ public class PhoneNumberService {
 
     private Boolean noneMatchPhoneNumber(String phoneNumber) {
 
-        Predicate<PhoneNumber> phoneNumberPredicate = p -> p.getPhoneNumber().equals(phoneNumber);
-
-        if (phoneNumberDao.findAll().stream().noneMatch(phoneNumberPredicate)) {
-            return true;
-        } else {
+        if (phoneNumberDao.existsPhoneNumberByPhoneNumber(phoneNumber)) {
             throw new AlreadyExistPhoneNumberException(Messages.MSG_ALL_READY_PHONE_NUMBER + " " + phoneNumber);
+        } else {
+            return true;
         }
 
     }
-
 }

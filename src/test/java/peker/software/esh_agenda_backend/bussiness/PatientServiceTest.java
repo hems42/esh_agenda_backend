@@ -40,6 +40,17 @@ class PatientServiceTest {
     @Test
     public void testCreatePatient_itShouldReturn_PatientDto() {
 
+        /*
+        * City city = cityService.findCityById(patientRequest.getPlaceOfBirthId());
+
+        Patient patient = CreatePatientRequest.convert(patientRequest);
+
+        patient.setCreatedDate(LocalDateTime.now());
+
+        patient.setPlaceOfBirth(city);
+
+        return patientDtoConvertor.convert(patientDao.save(patient));*/
+
         City city=cityService.findCityById(1);
 
         Patient patient= new Patient(

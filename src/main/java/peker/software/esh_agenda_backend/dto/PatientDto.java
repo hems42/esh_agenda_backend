@@ -7,6 +7,7 @@ import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -35,6 +36,8 @@ public class PatientDto {
     private int age;
 
     private CityDto placeOfBirth;
+
+    private List<PhoneNumberDto> phoneNumbers;
 
     private Boolean isActive = true;
 

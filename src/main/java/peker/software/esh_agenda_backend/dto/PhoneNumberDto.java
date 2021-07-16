@@ -14,6 +14,4 @@ public class PhoneNumberDto {
     private String phoneNumber;
 
     private String numberDescription;
-
-    private PatientDto patient;
 }

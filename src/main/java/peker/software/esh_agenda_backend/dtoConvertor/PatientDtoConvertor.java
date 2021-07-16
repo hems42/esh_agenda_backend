@@ -5,13 +5,17 @@ import org.springframework.stereotype.Component;
 import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.entities.Patient;
 
+import java.util.stream.Collectors;
+
 @Component
 public class PatientDtoConvertor {
 
     private final CityDtoConvertor cityDtoConvertor;
+    private final PhoneNumberDtoConvertor phoneNumberDtoConvertor;
 
-    public PatientDtoConvertor(CityDtoConvertor cityDtoConvertor) {
+    public PatientDtoConvertor(CityDtoConvertor cityDtoConvertor, PhoneNumberDtoConvertor phoneNumberDtoConvertor) {
         this.cityDtoConvertor = cityDtoConvertor;
+        this.phoneNumberDtoConvertor = phoneNumberDtoConvertor;
     }
 
     public Patient convert(PatientDto from) {
@@ -30,6 +34,11 @@ public class PatientDtoConvertor {
         patient.setIsActive(from.getIsActive());
         patient.setCurrentStateOfPatient(from.getCurrentStateOfPatient());
         patient.setPlaceOfBirth(cityDtoConvertor.convert(from.getPlaceOfBirth()));
+        patient.setPhoneNumbers(from
+                .getPhoneNumbers()
+                .stream()
+                .map((p)->phoneNumberDtoConvertor.convert(p))
+                .collect(Collectors.toList()));
         patient.setCreatedDate(from.getCreatedDate());
 
         if (from.getUpdatedDate() != null) {
@@ -55,6 +64,11 @@ public class PatientDtoConvertor {
         patientDto.setIsActive(from.getIsActive());
         patientDto.setCurrentStateOfPatient(from.getCurrentStateOfPatient());
         patientDto.setPlaceOfBirth(cityDtoConvertor.convert(from.getPlaceOfBirth()));
+        patientDto.setPhoneNumbers(from
+                .getPhoneNumbers()
+                .stream()
+                .map((p)->phoneNumberDtoConvertor.convert(p))
+                .collect(Collectors.toList()));
         patientDto.setCreatedDate(from.getCreatedDate());
 
         if (from.getUpdatedDate() != null) {

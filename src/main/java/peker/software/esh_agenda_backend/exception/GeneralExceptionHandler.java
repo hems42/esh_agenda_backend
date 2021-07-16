@@ -17,7 +17,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @NotNull
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   @NotNull HttpHeaders headers,
