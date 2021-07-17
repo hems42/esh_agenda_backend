@@ -2,7 +2,6 @@ package peker.software.esh_agenda_backend.bussiness;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import peker.software.esh_agenda_backend.dataAccess.CityDao;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoConvertor.CityDtoConvertor;
@@ -28,6 +27,9 @@ class CityServiceTest {
         cityDtoConvertor = mock(CityDtoConvertor.class);
         cityService = new CityService(cityDao, cityDtoConvertor);
     }
+
+
+    //CREATE
 
     @Test
     void testCreateCity_whenNotAlreadyExist_itShouldReturn_CityDto() {
@@ -58,11 +60,56 @@ class CityServiceTest {
         assertThrows(AlreadyExistCityException.class, () -> cityService.createCity(cityRequest));
     }
 
+
+    //SELECT
+
     @Test
-    void getCityById() {
+    void testGetCityById_whenExistCity_itShouldReturn_CityDto() {
     }
 
     @Test
-    void getAllCities() {
+    void testGetCityById_whenNotExistCity_itShouldThrow_NotFoundCityException() {
     }
+
+
+    @Test
+    void testGetAllCities_whenExistCityOrCities_itShouldReturn_ListOfCityDto() {
+    }
+
+    @Test
+    void testGetAllCities_whenNotExistCity_itShouldThrow_NotFoundCityException() {
+    }
+
+    @Test
+    void testFindCityById_whenExistCity_itShouldReturn_City() {
+
+    }
+
+    @Test
+    void testFindCityById_whenNotExistCity_itShouldThrow_NotFoundCityException() {
+
+    }
+
+
+    //UPDATE
+
+    @Test
+    void updateCityById() {
+
+    }
+
+
+    //DELETE
+
+    @Test
+    void deleteAllCities() {
+
+    }
+
+    @Test
+    void deleteCityById() {
+
+    }
+
+
 }

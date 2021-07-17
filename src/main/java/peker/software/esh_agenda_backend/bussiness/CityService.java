@@ -6,6 +6,7 @@ import peker.software.esh_agenda_backend.dataAccess.CityDao;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoConvertor.CityDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
+import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdateCityRequest;
 import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.exception.AlreadyExistCityException;
@@ -37,8 +38,21 @@ public class CityService {
         return convertor.convert(findCityById(id));
     }
 
-    public List<CityDto> getAllCitiesByPatient(Patient patient) {
-        return null;
+    public CityDto updateCityById(UpdateCityRequest cityRequest, Integer cityId) {
+
+        City city = findCityById(cityId);
+
+        city.setCityName(cityRequest.getCityName());
+
+        return convertor.convert(cityDao.save(city));
+    }
+
+    public void deleteCityById(Integer cityId) {
+        cityDao.deleteById(cityId);
+    }
+
+    public void deleteAllCities() {
+        cityDao.deleteAll();
     }
 
     public List<CityDto> getAllCities() {
