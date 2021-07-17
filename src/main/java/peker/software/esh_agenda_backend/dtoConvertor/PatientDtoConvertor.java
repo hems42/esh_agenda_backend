@@ -37,7 +37,7 @@ public class PatientDtoConvertor {
         patient.setPhoneNumbers(from
                 .getPhoneNumbers()
                 .stream()
-                .map((p)->phoneNumberDtoConvertor.convert(p))
+                .map((p) -> phoneNumberDtoConvertor.convert(p))
                 .collect(Collectors.toList()));
         patient.setCreatedDate(from.getCreatedDate());
 
@@ -67,7 +67,7 @@ public class PatientDtoConvertor {
         patientDto.setPhoneNumbers(from
                 .getPhoneNumbers()
                 .stream()
-                .map((p)->phoneNumberDtoConvertor.convert(p))
+                .map((p) -> phoneNumberDtoConvertor.convert(p))
                 .collect(Collectors.toList()));
         patientDto.setCreatedDate(from.getCreatedDate());
 

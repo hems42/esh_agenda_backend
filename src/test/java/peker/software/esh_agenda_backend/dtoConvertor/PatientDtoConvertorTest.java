@@ -10,6 +10,9 @@ import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.testSupport.TestCitySupport;
+import peker.software.esh_agenda_backend.testSupport.TestPatientSupport;
+import peker.software.esh_agenda_backend.testSupport.TestPhoneNumberSupport;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -35,58 +38,22 @@ class PatientDtoConvertorTest {
     @Test
     void testConvert_itShouldReturn_PatientDto() {
 
-        City city = new City(0, "CITY");
+        City city = TestCitySupport.generateCity();
 
-        CityDto cityDto = new CityDto(0, "CITY");
+        CityDto cityDto = TestCitySupport.generateCityDto();
 
-        PhoneNumber phoneNumber = new PhoneNumber(
-                0,
-                "phoneNumber",
-                "phoneNumberDescription",
-                null);
+        PhoneNumber phoneNumber = TestPhoneNumberSupport.generatePhoneNumber();
 
-        PhoneNumberDto phoneNumberDto = new PhoneNumberDto(
-                0,
-                "phoneNumber",
-                "phoneNumberDescription");
+        PhoneNumberDto phoneNumberDto = TestPhoneNumberSupport.generatePhoneNumberDto();
 
-        Patient patient = new Patient(
-                null,
-                "patientNumber",
-                "name",
-                "surname",
-                "nationalIdentityNumber",
-                "sex",
-                "mumName",
-                "dadName",
-                LocalDate.of(1980, 10, 10),
-                12,
-                city,
-                Arrays.asList(phoneNumber),
-                true,
-                CurrentStateOfPatient.ACTIVE,
-                null,
-                null
-        );
+        Patient patient = TestPatientSupport.generatePatient();
+        patient.setPlaceOfBirth(city);
+        patient.setPhoneNumbers(Arrays.asList(phoneNumber));
 
-        PatientDto patientDto = new PatientDto(
-                null,
-                "patientNumber",
-                "name",
-                "surname",
-                "nationalIdentityNumber",
-                "sex",
-                "mumName",
-                "dadName",
-                LocalDate.of(1980, 10, 10),
-                12,
-                cityDto,
-                Arrays.asList(phoneNumberDto),
-                true,
-                CurrentStateOfPatient.ACTIVE,
-                null,
-                null
-        );
+
+        PatientDto patientDto = TestPatientSupport.generatePatientDto();
+        patientDto.setPlaceOfBirth(cityDto);
+        patientDto.setPhoneNumbers(Arrays.asList(phoneNumberDto));
 
 
         when(cityDtoConvertor.convert(city)).thenReturn(cityDto);
@@ -95,65 +62,43 @@ class PatientDtoConvertorTest {
         PatientDto patientDtoResult = patientDtoConvertor.convert(patient);
 
 
-        assertEquals(patientDtoResult, patientDto);
+        assertEquals(patientDto.getId(), patientDtoResult.getId());
+        assertEquals(patientDto.getPatientNumber(), patientDtoResult.getPatientNumber());
+        assertEquals(patientDto.getFirstName(), patientDtoResult.getFirstName());
+        assertEquals(patientDto.getLastName(), patientDtoResult.getLastName());
+        assertEquals(patientDto.getNationalIdentityNumber(), patientDtoResult.getNationalIdentityNumber());
+        assertEquals(patientDto.getSex(), patientDtoResult.getSex());
+        assertEquals(patientDto.getMumName(), patientDtoResult.getMumName());
+        assertEquals(patientDto.getDadName(), patientDtoResult.getDadName());
+        assertEquals(patientDto.getBirthDayOfPatient(), patientDtoResult.getBirthDayOfPatient());
+        assertEquals(patientDto.getAge(), patientDtoResult.getAge());
+        assertEquals(patientDto.getPlaceOfBirth(), patientDtoResult.getPlaceOfBirth());
+        assertArrayEquals(patientDto.getPhoneNumbers().toArray(), patientDtoResult.getPhoneNumbers().toArray());
+        assertEquals(patientDto.getIsActive(), patientDtoResult.getIsActive());
+        assertEquals(patientDto.getCurrentStateOfPatient(), patientDtoResult.getCurrentStateOfPatient());
 
     }
 
     @Test
     void testConvert_itShouldReturn_Patient() {
-        City city = new City(0, "CITY");
 
-        CityDto cityDto = new CityDto(0, "CITY");
 
-        PhoneNumber phoneNumber = new PhoneNumber(
-                0,
-                "phoneNumber",
-                "phoneNumberDescription",
-                null);
+        City city = TestCitySupport.generateCity();
 
-        PhoneNumberDto phoneNumberDto = new PhoneNumberDto(
-                0,
-                "phoneNumber",
-                "phoneNumberDescription");
+        CityDto cityDto = TestCitySupport.generateCityDto();
 
-        Patient patient = new Patient(
-                null,
-                "patientNumber",
-                "name",
-                "surname",
-                "nationalIdentityNumber",
-                "sex",
-                "mumName",
-                "dadName",
-                LocalDate.of(1980, 10, 10),
-                12,
-                city,
-                Arrays.asList(phoneNumber),
-                true,
-                CurrentStateOfPatient.ACTIVE,
-                null,
-                null
-        );
+        PhoneNumber phoneNumber = TestPhoneNumberSupport.generatePhoneNumber();
 
-        PatientDto patientDto = new PatientDto(
-                null,
-                "patientNumber",
-                "name",
-                "surname",
-                "nationalIdentityNumber",
-                "sex",
-                "mumName",
-                "dadName",
-                LocalDate.of(1980, 10, 10),
-                12,
-                cityDto,
-                Arrays.asList(phoneNumberDto),
-                true,
-                CurrentStateOfPatient.ACTIVE,
-                null,
-                null
-        );
+        PhoneNumberDto phoneNumberDto = TestPhoneNumberSupport.generatePhoneNumberDto();
 
+        Patient patient = TestPatientSupport.generatePatient();
+        patient.setPlaceOfBirth(city);
+        patient.setPhoneNumbers(Arrays.asList(phoneNumber));
+
+
+        PatientDto patientDto = TestPatientSupport.generatePatientDto();
+        patientDto.setPlaceOfBirth(cityDto);
+        patientDto.setPhoneNumbers(Arrays.asList(phoneNumberDto));
 
         when(cityDtoConvertor.convert(cityDto)).thenReturn(city);
         when(phoneNumberDtoConvertor.convert(phoneNumberDto)).thenReturn(phoneNumber);
@@ -161,7 +106,21 @@ class PatientDtoConvertorTest {
         Patient patientResult = patientDtoConvertor.convert(patientDto);
 
 
-        assertEquals(patientResult, patient);
+        assertEquals(patient.getId(), patientResult.getId());
+        assertEquals(patient.getPatientNumber(), patientResult.getPatientNumber());
+        assertEquals(patient.getFirstName(), patientResult.getFirstName());
+        assertEquals(patient.getLastName(), patientResult.getLastName());
+        assertEquals(patient.getNationalIdentityNumber(), patientResult.getNationalIdentityNumber());
+        assertEquals(patient.getSex(), patientResult.getSex());
+        assertEquals(patient.getMumName(), patientResult.getMumName());
+        assertEquals(patient.getDadName(), patientResult.getDadName());
+        assertEquals(patient.getBirthDayOfPatient(), patientResult.getBirthDayOfPatient());
+        assertEquals(patient.getAge(), patientResult.getAge());
+        assertEquals(patient.getPlaceOfBirth(), patientResult.getPlaceOfBirth());
+        assertArrayEquals(patient.getPhoneNumbers().toArray(), patientResult.getPhoneNumbers().toArray());
+        assertEquals(patient.getIsActive(), patientResult.getIsActive());
+        assertEquals(patient.getCurrentStateOfPatient(), patientResult.getCurrentStateOfPatient());
+
 
     }
 }

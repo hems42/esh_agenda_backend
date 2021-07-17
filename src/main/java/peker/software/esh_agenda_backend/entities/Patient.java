@@ -59,7 +59,7 @@ public class Patient {
     @Column(nullable = false)
     private LocalDate birthDayOfPatient;
 
-    @Column(length = 40)
+    @Column(length = 3)
     private int age;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.testSupport.TestCitySupport;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -22,26 +23,26 @@ class CityDtoConvertorTest {
     @Test
     void testConvert_itShouldReturn_CityDto() {
 
-        City city = new City(0, "City");
+        City city = TestCitySupport.generateCity();
 
-        CityDto cityDto = new CityDto(0, "City");
+        CityDto cityDto = TestCitySupport.generateCityDto();
 
         CityDto cityDtoResult = convertor.convert(city);
 
-        assertEquals(cityDtoResult, cityDto);
+        assertEquals(cityDto, cityDtoResult);
 
     }
 
     @Test
     void testConvert_itShouldReturn_City() {
 
-        City city = new City(0, "City");
+        City city = TestCitySupport.generateCity();
 
-        CityDto cityDto = new CityDto(0, "City");
+        CityDto cityDto = TestCitySupport.generateCityDto();
 
         City cityResult = convertor.convert(cityDto);
 
-        assertEquals(cityResult, city);
+        assertEquals(city, cityResult);
 
     }
 }
