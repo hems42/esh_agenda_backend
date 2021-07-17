@@ -33,7 +33,7 @@ public class CreatePatientRequest {
     private Integer placeOfBirthId;
 
 
-    public static Patient convert(CreatePatientRequest from) {
+   /* public static Patient convert(CreatePatientRequest from) {
 
         Patient patient = new Patient(
                 null,
@@ -57,5 +57,5 @@ public class CreatePatientRequest {
                 null
         );
         return patient;
-    }
+    }*/
 }

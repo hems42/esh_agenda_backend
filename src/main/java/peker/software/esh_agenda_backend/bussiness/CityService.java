@@ -6,9 +6,11 @@ import peker.software.esh_agenda_backend.dataAccess.CityDao;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoConvertor.CityDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
+import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.exception.AlreadyExistCityException;
 import peker.software.esh_agenda_backend.exception.NotFoundCityException;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,15 +27,18 @@ public class CityService {
     }
 
     public CityDto createCity(CreateCityRequest cityRequest) {
-        if (!anyMatchCity(cityRequest.getCityName())) {
-            return convertor.convert(cityDao.save(new City(0, cityRequest.getCityName())));
-        } else {
-            return new CityDto();
-        }
+        return noneMatchCity(cityRequest.getCityName()) == true ?
+                convertor.convert(cityDao
+                        .save(new City(0, cityRequest.getCityName()))) :
+                new CityDto();
     }
 
     public CityDto getCityById(Integer id) {
         return convertor.convert(findCityById(id));
+    }
+
+    public List<CityDto> getAllCitiesByPatient(Patient patient) {
+        return null;
     }
 
     public List<CityDto> getAllCities() {
@@ -44,15 +49,12 @@ public class CityService {
         return cityDao.findById(id).orElseThrow(() -> new NotFoundCityException(Messages.MSG_NOT_FOUND_CITY));
     }
 
-    private Boolean anyMatchCity(String cityName) {
-        CityDto cityDto = new CityDto(0, cityName);
-        Boolean result = getAllCities().stream().anyMatch(cityDtoFound -> cityDtoFound == cityDto);
+    private Boolean noneMatchCity(String cityName) {
 
-        if (result == true) {
+        if (cityDao.existsCityByCityName(cityName)) {
             throw new AlreadyExistCityException(Messages.MSG_ALL_READY_EXIST_CITY + " " + cityName);
         } else {
-            return false;
-
+            return true;
         }
     }
 

@@ -2,13 +2,11 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
 import peker.software.esh_agenda_backend.testSupport.TestPhoneNumberSupport;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 class PhoneNumberDtoConvertorTest {
 

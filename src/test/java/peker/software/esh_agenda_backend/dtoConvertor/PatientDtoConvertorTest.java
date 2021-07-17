@@ -2,19 +2,17 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
-import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
 import peker.software.esh_agenda_backend.testSupport.TestCitySupport;
 import peker.software.esh_agenda_backend.testSupport.TestPatientSupport;
 import peker.software.esh_agenda_backend.testSupport.TestPhoneNumberSupport;
 
-import java.time.LocalDate;
+
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;

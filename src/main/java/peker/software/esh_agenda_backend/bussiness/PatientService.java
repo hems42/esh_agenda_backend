@@ -10,6 +10,7 @@ import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientR
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
 import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 import peker.software.esh_agenda_backend.exception.AlreadyExistUserException;
 import peker.software.esh_agenda_backend.exception.NotFoundUserException;
 
@@ -42,10 +43,22 @@ public class PatientService {
 
         City city = cityService.findCityById(patientRequest.getPlaceOfBirthId());
 
-        Patient patient = CreatePatientRequest.convert(patientRequest);
-
+        Patient patient= new Patient();
+        patient.setPatientNumber(patientRequest.getFirstName().substring(0, 2)
+                + patientRequest.getLastName().substring(0, 2)
+                + "-"
+                + LocalDateTime.now());
+        patient.setFirstName(patientRequest.getFirstName());
+        patient.setLastName(patientRequest.getLastName());
+        patient.setNationalIdentityNumber(patientRequest.getNationalIdentityNumber());
+        patient.setSex(patientRequest.getSex());
+        patient.setMumName(patientRequest.getMumName());
+        patient.setDadName(patientRequest.getDadName());
+        patient.setBirthDayOfPatient(patientRequest.getBirthDayOfPatient());
+        patient.setAge(patientRequest.getAge());
+        patient.setIsActive(true);
+        patient.setCurrentStateOfPatient(CurrentStateOfPatient.ACTIVE);
         patient.setCreatedDate(LocalDateTime.now());
-
         patient.setPlaceOfBirth(city);
 
         return noneMatchPatient(patientRequest
@@ -71,7 +84,7 @@ public class PatientService {
         return patientDao.findById(patientId).orElseThrow(() -> new NotFoundUserException(Messages.MSG_NOT_FOUND_PATIENT));
     }
 
-    public Boolean noneMatchPatient(String nationalIdentityNumber) {
+    private Boolean noneMatchPatient(String nationalIdentityNumber) {
 
         if (patientDao.existsPatientByNationalIdentityNumber(nationalIdentityNumber)) {
             throw new AlreadyExistUserException(Messages.MSG_ALL_READY_PATIENT + " Tc No: " + nationalIdentityNumber);

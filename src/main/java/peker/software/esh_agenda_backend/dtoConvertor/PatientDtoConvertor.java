@@ -34,12 +34,15 @@ public class PatientDtoConvertor {
         patient.setIsActive(from.getIsActive());
         patient.setCurrentStateOfPatient(from.getCurrentStateOfPatient());
         patient.setPlaceOfBirth(cityDtoConvertor.convert(from.getPlaceOfBirth()));
-        patient.setPhoneNumbers(from
-                .getPhoneNumbers()
-                .stream()
-                .map((p) -> phoneNumberDtoConvertor.convert(p))
-                .collect(Collectors.toList()));
         patient.setCreatedDate(from.getCreatedDate());
+
+        if (from.getPhoneNumbers() != null) {
+            patient.setPhoneNumbers(from
+                    .getPhoneNumbers()
+                    .stream()
+                    .map((p) -> phoneNumberDtoConvertor.convert(p))
+                    .collect(Collectors.toList()));
+        }
 
         if (from.getUpdatedDate() != null) {
             patient.setUpdatedDate(from.getUpdatedDate());
@@ -64,12 +67,15 @@ public class PatientDtoConvertor {
         patientDto.setIsActive(from.getIsActive());
         patientDto.setCurrentStateOfPatient(from.getCurrentStateOfPatient());
         patientDto.setPlaceOfBirth(cityDtoConvertor.convert(from.getPlaceOfBirth()));
-        patientDto.setPhoneNumbers(from
-                .getPhoneNumbers()
-                .stream()
-                .map((p) -> phoneNumberDtoConvertor.convert(p))
-                .collect(Collectors.toList()));
         patientDto.setCreatedDate(from.getCreatedDate());
+
+        if (from.getPhoneNumbers() != null) {
+            patientDto.setPhoneNumbers(from
+                    .getPhoneNumbers()
+                    .stream()
+                    .map((p) -> phoneNumberDtoConvertor.convert(p))
+                    .collect(Collectors.toList()));
+        }
 
         if (from.getUpdatedDate() != null) {
             patientDto.setUpdatedDate(from.getUpdatedDate());
