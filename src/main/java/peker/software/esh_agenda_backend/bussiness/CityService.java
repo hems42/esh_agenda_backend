@@ -56,7 +56,14 @@ public class CityService {
     }
 
     public List<CityDto> getAllCities() {
-        return cityDao.findAll().stream().map((c) -> convertor.convert(c)).collect(Collectors.toList());
+        List<CityDto> citiesDto = cityDao.findAll().stream().map((c) -> convertor.convert(c)).collect(Collectors.toList());
+
+        if (citiesDto.isEmpty()) {
+            throw new NotFoundCityException(Messages.MSG_NOT_FOUND_CITY);
+        } else {
+            return citiesDto;
+        }
+
     }
 
     public City findCityById(Integer id) {
