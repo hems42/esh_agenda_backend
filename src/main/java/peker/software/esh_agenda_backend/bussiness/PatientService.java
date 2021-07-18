@@ -8,6 +8,7 @@ import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoConvertor.PatientDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
+import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdatePatientRequest;
 import peker.software.esh_agenda_backend.entities.Patient;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
@@ -41,9 +42,7 @@ public class PatientService {
 
     public PatientDto createPatient(CreatePatientRequest patientRequest) {
 
-        City city = cityService.findCityById(patientRequest.getPlaceOfBirthId());
-
-        Patient patient= new Patient();
+        Patient patient = new Patient();
         patient.setPatientNumber(patientRequest.getFirstName().substring(0, 2)
                 + patientRequest.getLastName().substring(0, 2)
                 + "-"
@@ -59,13 +58,75 @@ public class PatientService {
         patient.setIsActive(true);
         patient.setCurrentStateOfPatient(CurrentStateOfPatient.ACTIVE);
         patient.setCreatedDate(LocalDateTime.now());
-        patient.setPlaceOfBirth(city);
+        patient.setPlaceOfBirth(getCityById(patientRequest.getPlaceOfBirthId()));
 
         return noneMatchPatient(patientRequest
                 .getNationalIdentityNumber()) == true
                 ? patientDtoConvertor
                 .convert(patientDao.save(patient))
                 : new PatientDto();
+    }
+
+    public PatientDto getPatientById(UUID patientId) {
+        return patientDtoConvertor.convert(findPatientById(patientId));
+    }
+
+    public List<PatientDto> getAllPatients() {
+        return isThereAnyPatient() == true ?
+                patientDao.findAll().stream().map((p) -> patientDtoConvertor.convert(p))
+                        .collect(Collectors.toList()) : null;
+    }
+
+    public PatientDto updatePatientById(UUID patientId, UpdatePatientRequest patientRequest) {
+
+        Patient patient = findPatientById(patientId);
+
+        patient.setFirstName(patientRequest.getFirstName());
+        patient.setLastName(patientRequest.getLastName());
+        patient.setNationalIdentityNumber(patientRequest.getNationalIdentityNumber());
+        patient.setSex(patientRequest.getSex());
+        patient.setMumName(patientRequest.getMumName());
+        patient.setDadName(patientRequest.getDadName());
+        patient.setBirthDayOfPatient(patientRequest.getBirthDayOfPatient());
+        patient.setAge(patientRequest.getAge());
+        patient.setPlaceOfBirth(getCityById(patientRequest.getPlaceOfBirthId()));
+
+        return patientDtoConvertor.convert(patientDao.save(patient));
+    }
+
+    public PatientDto updatePatientByPatient(Patient patientRequest) {
+
+        Patient patient = findPatientById(patientRequest.getId());
+
+        patient.setFirstName(patientRequest.getFirstName());
+        patient.setLastName(patientRequest.getLastName());
+        patient.setNationalIdentityNumber(patientRequest.getNationalIdentityNumber());
+        patient.setSex(patientRequest.getSex());
+        patient.setMumName(patientRequest.getMumName());
+        patient.setDadName(patientRequest.getDadName());
+        patient.setBirthDayOfPatient(patientRequest.getBirthDayOfPatient());
+        patient.setAge(patientRequest.getAge());
+        patient.setPlaceOfBirth(patientRequest.getPlaceOfBirth());
+
+        return patientDtoConvertor.convert(patientDao.save(patient));
+    }
+
+    public Boolean setActivePatientById(UUID patientId) {
+
+        Patient patient = findPatientById(patientId);
+
+        patient.setIsActive(true);
+
+        return patientDao.save(patient).getIsActive() == true ? true : false;
+    }
+
+    public Boolean setDeActivePatientById(UUID patientId) {
+
+        Patient patient = findPatientById(patientId);
+
+        patient.setIsActive(false);
+
+        return patientDao.save(patient).getIsActive() == false ? true : false;
     }
 
     public List<PhoneNumberDto> addPhoneNumbersByPatientId(UUID patientId,
@@ -91,5 +152,17 @@ public class PatientService {
         } else {
             return true;
         }
+    }
+
+    private Boolean isThereAnyPatient() {
+        if (patientDao.count() > 0) {
+            return true;
+        } else {
+            throw new NotFoundUserException(Messages.MSG_NOT_FOUND_PATIENT);
+        }
+    }
+
+    private City getCityById(Integer cityId) {
+        return cityService.findCityById(cityId);
     }
 }

@@ -49,7 +49,7 @@ public class CityController {
         return ResponseEntity.ok(cityService.getCityById(cityId));
     }
 
-    @PatchMapping("/deleteCityById")
+    @DeleteMapping("/deleteCityById")
     public ResponseEntity deleteCityById(@Valid @RequestParam Integer cityId) {
         cityService.deleteCityById(cityId);
         return ResponseEntity.ok().build();
