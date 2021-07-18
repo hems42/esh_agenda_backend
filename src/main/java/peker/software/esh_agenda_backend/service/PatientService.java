@@ -1,28 +1,26 @@
-package peker.software.esh_agenda_backend.bussiness;
+package peker.software.esh_agenda_backend.service;
 
 import org.springframework.stereotype.Service;
 import peker.software.esh_agenda_backend.core.utils.Messages;
-import peker.software.esh_agenda_backend.dataAccess.PatientDao;
+import peker.software.esh_agenda_backend.repository.PatientDao;
 import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoConvertor.PatientDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
 import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdatePatientRequest;
-import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.City;
-import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.domain.Patient;
+import peker.software.esh_agenda_backend.domain.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.CurrentStateOfPatient;
+import peker.software.esh_agenda_backend.domain.utils.PhoneNumber;
 import peker.software.esh_agenda_backend.exception.AlreadyExistUserException;
 import peker.software.esh_agenda_backend.exception.NotFoundUserException;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class PatientService {

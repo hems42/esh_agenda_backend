@@ -1,13 +1,13 @@
-package peker.software.esh_agenda_backend.bussiness;
+package peker.software.esh_agenda_backend.service;
 
 import org.springframework.stereotype.Service;
 import peker.software.esh_agenda_backend.core.utils.Messages;
-import peker.software.esh_agenda_backend.dataAccess.PhoneNumberDao;
+import peker.software.esh_agenda_backend.repository.PhoneNumberDao;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoConvertor.PhoneNumberDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
-import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.domain.Patient;
+import peker.software.esh_agenda_backend.domain.utils.PhoneNumber;
 import peker.software.esh_agenda_backend.exception.AlreadyExistPhoneNumberException;
 import peker.software.esh_agenda_backend.exception.NotFoundPhoneNumberException;
 
@@ -53,7 +53,9 @@ public class PhoneNumberService {
     }
 
     private PhoneNumber findPhoneNumberById(Integer id) {
-        return phoneNumberDao.findById(id).orElseThrow(() -> new NotFoundPhoneNumberException(Messages.MSG_NOT_FOUND_PHONE_NUMBER));
+        return phoneNumberDao.findById(id)
+                .orElseThrow(() -> new NotFoundPhoneNumberException(
+                        Messages.MSG_NOT_FOUND_PHONE_NUMBER));
     }
 
     private Boolean noneMatchPhoneNumber(String phoneNumber) {

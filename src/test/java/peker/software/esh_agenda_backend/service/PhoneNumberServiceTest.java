@@ -1,12 +1,10 @@
-package peker.software.esh_agenda_backend.bussiness;
+package peker.software.esh_agenda_backend.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import peker.software.esh_agenda_backend.dataAccess.PhoneNumberDao;
+import peker.software.esh_agenda_backend.repository.PhoneNumberDao;
 import peker.software.esh_agenda_backend.dtoConvertor.PhoneNumberDtoConvertor;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class PhoneNumberServiceTest {

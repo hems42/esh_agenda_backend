@@ -2,7 +2,7 @@ package peker.software.esh_agenda_backend.testSupport;
 
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
-import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.City;
 
 public class TestCitySupport {
 

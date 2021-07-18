@@ -3,7 +3,7 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import peker.software.esh_agenda_backend.dto.CityDto;
-import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.City;
 import peker.software.esh_agenda_backend.testSupport.TestCitySupport;
 
 import static org.junit.jupiter.api.Assertions.*;

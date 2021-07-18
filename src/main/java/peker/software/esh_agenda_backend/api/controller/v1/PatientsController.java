@@ -1,14 +1,13 @@
-package peker.software.esh_agenda_backend.api.v1;
+package peker.software.esh_agenda_backend.api.controller.v1;
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import peker.software.esh_agenda_backend.bussiness.PatientService;
+import peker.software.esh_agenda_backend.service.PatientService;
 import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
 
 import javax.validation.Valid;
 import java.util.List;

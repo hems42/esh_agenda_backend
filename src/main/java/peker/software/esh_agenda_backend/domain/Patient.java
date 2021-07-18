@@ -1,12 +1,12 @@
-package peker.software.esh_agenda_backend.entities;
+package peker.software.esh_agenda_backend.domain;
 
 
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
-import peker.software.esh_agenda_backend.entities.utils.City;
-import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.domain.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.CurrentStateOfPatient;
+import peker.software.esh_agenda_backend.domain.utils.PhoneNumber;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,11 +1,10 @@
 package peker.software.esh_agenda_backend.testSupport;
 
 import peker.software.esh_agenda_backend.dto.PatientDto;
-import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
+import peker.software.esh_agenda_backend.domain.Patient;
+import peker.software.esh_agenda_backend.domain.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class TestPatientSupport {
 

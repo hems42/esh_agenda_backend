@@ -2,7 +2,7 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 
 import org.springframework.stereotype.Component;
 import peker.software.esh_agenda_backend.dto.CityDto;
-import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.City;
 
 @Component
 public class CityDtoConvertor {

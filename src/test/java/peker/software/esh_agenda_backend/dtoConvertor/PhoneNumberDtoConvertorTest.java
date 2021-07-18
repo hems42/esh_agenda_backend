@@ -3,7 +3,7 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.domain.utils.PhoneNumber;
 import peker.software.esh_agenda_backend.testSupport.TestPhoneNumberSupport;
 
 import static org.junit.jupiter.api.Assertions.*;

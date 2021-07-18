@@ -3,11 +3,8 @@ package peker.software.esh_agenda_backend.dtoRequest.createRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor

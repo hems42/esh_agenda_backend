@@ -1,8 +1,8 @@
-package peker.software.esh_agenda_backend.entities.utils;
+package peker.software.esh_agenda_backend.domain.utils;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import peker.software.esh_agenda_backend.entities.Patient;
+import peker.software.esh_agenda_backend.domain.Patient;
 
 import javax.persistence.*;
 import java.io.Serializable;

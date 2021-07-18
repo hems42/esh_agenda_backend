@@ -1,10 +1,8 @@
-package peker.software.esh_agenda_backend.dataAccess;
+package peker.software.esh_agenda_backend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.domain.Patient;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public interface PatientDao extends JpaRepository<Patient, UUID> {

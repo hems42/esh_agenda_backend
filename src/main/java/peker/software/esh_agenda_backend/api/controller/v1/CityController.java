@@ -1,15 +1,14 @@
-package peker.software.esh_agenda_backend.api.v1;
+package peker.software.esh_agenda_backend.api.controller.v1;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import peker.software.esh_agenda_backend.bussiness.CityService;
+import peker.software.esh_agenda_backend.service.CityService;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
 import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdateCityRequest;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/cities")

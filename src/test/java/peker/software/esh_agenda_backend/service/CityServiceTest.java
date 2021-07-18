@@ -1,13 +1,13 @@
-package peker.software.esh_agenda_backend.bussiness;
+package peker.software.esh_agenda_backend.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import peker.software.esh_agenda_backend.dataAccess.CityDao;
+import peker.software.esh_agenda_backend.repository.CityDao;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoConvertor.CityDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
 import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdateCityRequest;
-import peker.software.esh_agenda_backend.entities.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.City;
 import peker.software.esh_agenda_backend.exception.AlreadyExistCityException;
 import peker.software.esh_agenda_backend.exception.NotFoundCityException;
 import peker.software.esh_agenda_backend.testSupport.TestCitySupport;

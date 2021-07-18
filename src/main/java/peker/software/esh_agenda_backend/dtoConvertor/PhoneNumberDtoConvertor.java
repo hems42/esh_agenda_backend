@@ -2,7 +2,7 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 
 import org.springframework.stereotype.Component;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
-import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
+import peker.software.esh_agenda_backend.domain.utils.PhoneNumber;
 
 @Component
 public class PhoneNumberDtoConvertor {

@@ -3,7 +3,7 @@ package peker.software.esh_agenda_backend.dtoConvertor;
 
 import org.springframework.stereotype.Component;
 import peker.software.esh_agenda_backend.dto.PatientDto;
-import peker.software.esh_agenda_backend.entities.Patient;
+import peker.software.esh_agenda_backend.domain.Patient;
 
 import java.util.stream.Collectors;
 

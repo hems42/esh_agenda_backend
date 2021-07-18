@@ -1,13 +1,13 @@
-package peker.software.esh_agenda_backend.bussiness;
+package peker.software.esh_agenda_backend.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import peker.software.esh_agenda_backend.dataAccess.PatientDao;
+import peker.software.esh_agenda_backend.repository.PatientDao;
 import peker.software.esh_agenda_backend.dtoConvertor.PatientDtoConvertor;
 import peker.software.esh_agenda_backend.dtoConvertor.PhoneNumberDtoConvertor;
-import peker.software.esh_agenda_backend.entities.Patient;
-import peker.software.esh_agenda_backend.entities.utils.City;
-import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
+import peker.software.esh_agenda_backend.domain.Patient;
+import peker.software.esh_agenda_backend.domain.utils.City;
+import peker.software.esh_agenda_backend.domain.utils.CurrentStateOfPatient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

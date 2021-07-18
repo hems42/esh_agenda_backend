@@ -1,4 +1,4 @@
-package peker.software.esh_agenda_backend.entities.utils;
+package peker.software.esh_agenda_backend.domain.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
