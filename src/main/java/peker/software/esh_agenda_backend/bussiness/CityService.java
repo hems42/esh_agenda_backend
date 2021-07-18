@@ -34,6 +34,11 @@ public class CityService {
                 new CityDto();
     }
 
+    public List<CityDto> createCities(List<CreateCityRequest> cityRequests) {
+        return cityRequests
+                .stream().map((c) -> createCity(c)).collect(Collectors.toList());
+    }
+
     public CityDto getCityById(Integer id) {
         return convertor.convert(findCityById(id));
     }
@@ -48,11 +53,13 @@ public class CityService {
     }
 
     public void deleteCityById(Integer cityId) {
-        cityDao.deleteById(cityId);
+        cityDao.delete(findCityById(cityId));
     }
 
     public void deleteAllCities() {
-        cityDao.deleteAll();
+        if (isThereAnyCity()) {
+            cityDao.deleteAll();
+        }
     }
 
     public List<CityDto> getAllCities() {
@@ -79,4 +86,11 @@ public class CityService {
         }
     }
 
+    private Boolean isThereAnyCity() {
+        if (cityDao.count() > 0) {
+            return true;
+        } else {
+            throw new NotFoundCityException(Messages.MSG_NOT_FOUND_CITY);
+        }
+    }
 }

@@ -149,7 +149,7 @@ class CityServiceTest {
     //UPDATE
 
     @Test
-    void updateCityById() {
+    void testUpdateCityById_whenExistCity_itShouldUpdatedCity() {
 
         City city = TestCitySupport.generateCity();
 
@@ -159,23 +159,47 @@ class CityServiceTest {
 
         cityService.updateCityById(new UpdateCityRequest("CITY UPDATED"), 0);
 
-        City  cityResult = cityDao.getById(0);
+        City cityResult = cityDao.findById(0).get();
 
-        assertEquals(cityUpdated, cityUpdated);
-
-
+        assertEquals(cityUpdated, cityResult);
     }
+
+
+    @Test
+    void testUpdateCityById_whenNotExistCity_itShouldThrow_NotFoundCityException() {
+
+        when(cityDao.findById(0)).thenReturn(Optional.empty());
+
+        assertThrows(NotFoundCityException.class, () -> cityService
+                .updateCityById(new UpdateCityRequest("CITY UPDATED"), 0));
+    }
+
 
 
     //DELETE
 
     @Test
-    void deleteAllCities() {
-
+    void testDeleteAllCities_whenExistCity_itShouldDeletedAllCities() {
     }
 
     @Test
-    void deleteCityById() {
+    void testDeleteAllCities_whenNotExistCity_itShouldThrow_NotFoundCityException() {
+
+        when(cityDao.count()).thenReturn(Long.valueOf("0"));
+
+        assertThrows(NotFoundCityException.class, () -> cityService.deleteAllCities());
+    }
+
+    @Test
+    void testDeleteCityById_whenExistCity_itShouldDeleteCityById() {
+    }
+
+    @Test
+    void testDeleteCityById_whenNotExistCity_itShouldThrow_NotFoundCityException() {
+
+        when(cityDao.findById(0)).thenReturn(Optional.empty());
+
+        assertThrows(NotFoundCityException.class, () -> cityService.deleteCityById(0));
 
     }
 

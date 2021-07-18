@@ -9,6 +9,7 @@ import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdateCityRequ
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/cities")
@@ -19,6 +20,13 @@ public class CityController {
     public CityController(CityService cityService) {
         this.cityService = cityService;
     }
+
+    @PostMapping("/createCities")
+    public ResponseEntity<List<CityDto>> createCities(@Valid @RequestBody List<CreateCityRequest> cityRequests) {
+        return ResponseEntity
+                .ok(cityService.createCities(cityRequests));
+    }
+
 
     @PostMapping("/createCity")
     public ResponseEntity<CityDto> createCity(@Valid @RequestBody CreateCityRequest cityRequest) {
