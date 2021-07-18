@@ -1,4 +1,4 @@
-package peker.software.esh_agenda_backend.api.controller.v1;
+package peker.software.esh_agenda_backend.controller;
 
 
 import org.springframework.http.ResponseEntity;
