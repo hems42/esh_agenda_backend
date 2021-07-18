@@ -1,14 +1,15 @@
 package peker.software.esh_agenda_backend.entities.utils;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@EqualsAndHashCode
 @AllArgsConstructor
 @Entity
 @Table(name = "Cities",
@@ -25,4 +26,18 @@ public class City {
 
     @Column(name="CityName",nullable = false,length = 100)
     private String cityName;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        City city = (City) o;
+
+        return Objects.equals(id, city.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 39525063;
+    }
 }

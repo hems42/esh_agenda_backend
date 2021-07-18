@@ -12,7 +12,6 @@ import peker.software.esh_agenda_backend.exception.AlreadyExistPhoneNumberExcept
 import peker.software.esh_agenda_backend.exception.NotFoundPhoneNumberException;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service

@@ -8,6 +8,7 @@ import peker.software.esh_agenda_backend.dto.PatientDto;
 import peker.software.esh_agenda_backend.dto.PhoneNumberDto;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePatientRequest;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreatePhoneNumberRequest;
+import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,5 +38,9 @@ public class PatientsController {
                         phoneNumberRequestes));
     }
 
+    @GetMapping("/getAllPhoneNumbersByPatientId")
+    public ResponseEntity<List<PhoneNumberDto>> getAllPhoneNumberByPatientId(@Valid @RequestParam UUID patientId) {
+        return ResponseEntity.ok(patientService.getPhoneNumberByPatientIdAndPhoneNumberId(patientId));
+    }
 
 }

@@ -2,15 +2,18 @@ package peker.software.esh_agenda_backend.entities;
 
 
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.entities.utils.CurrentStateOfPatient;
 import peker.software.esh_agenda_backend.entities.utils.PhoneNumber;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -27,7 +30,7 @@ import java.util.UUID;
 
         }
 )
-public class Patient {
+public class Patient implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -80,6 +83,17 @@ public class Patient {
     @Column(name = "UpdatedDate", insertable = false)
     private LocalDateTime updatedDate;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Patient patient = (Patient) o;
 
+        return Objects.equals(id, patient.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return 1748842812;
+    }
 }

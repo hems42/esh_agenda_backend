@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import peker.software.esh_agenda_backend.entities.Patient;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
@@ -18,7 +19,7 @@ import java.util.Objects;
                   @UniqueConstraint(name = "UK_PHONE_NUMBER",columnNames = "phoneNumber")
           }
 )
-public class PhoneNumber {
+public class PhoneNumber implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
