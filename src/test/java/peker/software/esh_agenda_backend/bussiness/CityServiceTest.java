@@ -6,6 +6,7 @@ import peker.software.esh_agenda_backend.dataAccess.CityDao;
 import peker.software.esh_agenda_backend.dto.CityDto;
 import peker.software.esh_agenda_backend.dtoConvertor.CityDtoConvertor;
 import peker.software.esh_agenda_backend.dtoRequest.createRequest.CreateCityRequest;
+import peker.software.esh_agenda_backend.dtoRequest.updateRequest.UpdateCityRequest;
 import peker.software.esh_agenda_backend.entities.utils.City;
 import peker.software.esh_agenda_backend.exception.AlreadyExistCityException;
 import peker.software.esh_agenda_backend.exception.NotFoundCityException;
@@ -115,11 +116,11 @@ class CityServiceTest {
     @Test
     void testGetAllCities_whenNotExistCity_itShouldThrow_NotFoundCityException() {
 
-        Optional<City> city=Optional.empty();
+        Optional<City> city = Optional.empty();
 
         when(cityDao.findAll()).thenReturn(city.stream().collect(Collectors.toList()));
 
-        assertThrows(NotFoundCityException.class,() -> cityService.getAllCities() );
+        assertThrows(NotFoundCityException.class, () -> cityService.getAllCities());
     }
 
     @Test
@@ -140,7 +141,7 @@ class CityServiceTest {
 
         when(cityDao.findById(0)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundCityException.class,() -> cityService.findCityById(0));
+        assertThrows(NotFoundCityException.class, () -> cityService.findCityById(0));
 
     }
 
@@ -149,6 +150,19 @@ class CityServiceTest {
 
     @Test
     void updateCityById() {
+
+        City city = TestCitySupport.generateCity();
+
+        City cityUpdated = new City(0, "CITY UPDATED");
+
+        when(cityDao.findById(0)).thenReturn(Optional.of(city));
+
+        cityService.updateCityById(new UpdateCityRequest("CITY UPDATED"), 0);
+
+        City  cityResult = cityDao.getById(0);
+
+        assertEquals(cityUpdated, cityUpdated);
+
 
     }
 
