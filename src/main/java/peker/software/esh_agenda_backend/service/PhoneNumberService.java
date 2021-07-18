@@ -46,10 +46,11 @@ public class PhoneNumberService {
     }
 
     public List<PhoneNumberDto> getAllPhoneNumbersByPatient(Patient patient) {
-        return phoneNumberDao
-                .findAllByPatient(patient)
-                .stream().map((p) -> phoneNumberDtoConvertor.convert(p))
-                .collect(Collectors.toList());
+        return isThereAnyPhoneNumberByPatient(patient) == true ?
+                phoneNumberDao
+                        .findAllByPatient(patient)
+                        .stream().map((p) -> phoneNumberDtoConvertor.convert(p))
+                        .collect(Collectors.toList()) : null;
     }
 
     private PhoneNumber findPhoneNumberById(Integer id) {
@@ -66,5 +67,21 @@ public class PhoneNumberService {
             return true;
         }
 
+    }
+
+    private Boolean isThereAnyPhoneNumberByPatient(Patient patient) {
+        if (phoneNumberDao.existsPhoneNumberByPatient(patient)) {
+            return true;
+        } else {
+            throw new NotFoundPhoneNumberException(Messages.MSG_NOT_FOUND_PHONE_NUMBER);
+        }
+    }
+
+    private Boolean isThereAnyPhoneNumber() {
+        if (phoneNumberDao.count()>0) {
+            return true;
+        } else {
+            throw new NotFoundPhoneNumberException(Messages.MSG_NOT_FOUND_PHONE_NUMBER);
+        }
     }
 }
